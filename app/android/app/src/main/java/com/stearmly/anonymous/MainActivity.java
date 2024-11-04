@@ -1,4 +1,4 @@
-package com.app;
+package com.stearmly.anonymous;
 
 import android.os.Build;
 import android.os.Bundle;
