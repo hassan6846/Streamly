@@ -40,9 +40,9 @@ const TabsConfigs = {
 
     Me: {
         Svg: ({ focused }: { focused: any }) => (
-            <View style={{ height: "100%",alignItems:"center",marginTop:20 }}>
+            <View style={{ height: "100%",alignItems:"center",marginTop:20,width:100 }}>
                 <Icon size={25} color={focused ? Colors.Light.Primary : "#5F6368"} name="account-balance-wallet" type="material" />
-                <Text style={{ fontSize: 10, fontWeight: "bold", color: focused ? Colors.Light.Primary : "#5F6368" }}>Me</Text>
+                <Text style={{ fontSize: 10, fontWeight: "bold", color: focused ? Colors.Light.Primary : "#5F6368" }}>Explore</Text>
             </View>
         )
     }

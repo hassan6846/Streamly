@@ -66,14 +66,14 @@ const HomePage = ({ navigation }: { navigation }) => {
 
     if (loading) {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: "center" }}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: "center" ,backgroundColor:"#fff"}}>
                 <ActivityIndicator size="large" />
             </View>
         );
     }
 
     return (
-        <SafeAreaView style={{flex:1,backgroundColor:"#fff"}}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
             <ScrollView
                 refreshControl={
                     <RefreshControl
