@@ -1,12 +1,14 @@
-import { View, StyleSheet, ScrollView, ActivityIndicator, Alert, RefreshControl } from 'react-native';
+import { View, StyleSheet, ScrollView, ActivityIndicator, Alert, RefreshControl, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 // UI
 import { Text, Button, Icon, Avatar } from '@rneui/themed';
 import ImageBlurShadow from 'react-native-image-blur-shadow';
 //utils
 import Colors from '../util/Color';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-const HomePage = () => {
+
+const HomePage = ({ navigation }: { navigation }) => {
     const [loading, setLoading] = useState(true);
     const [filmData, setFilmData] = useState<any>([]);
     const [scrolldata, setscrolldata] = useState<any>([]);
@@ -71,105 +73,109 @@ const HomePage = () => {
     }
 
     return (
-        <ScrollView
-            refreshControl={
-                <RefreshControl
-                    refreshing={loading}
-                    onRefresh={FetchData}
-                />
-            }
-
-            style={styles.HomeContainer}>
-            {/* Now Showing Section */}
-            <View style={styles.HomeHead}>
-                <Text h4 h4Style={{ fontSize: 16 }}>Now Showing</Text>
-                <Button
-                    title="See more"
-                    buttonStyle={styles.buttonStyle}
-                    titleStyle={styles.titleStyle}
-                    type="outline"
-                />
-            </View>
+        <SafeAreaView style={{flex:1,backgroundColor:"#fff"}}>
             <ScrollView
-                style={{ height: 380 }}
-                contentContainerStyle={{ paddingHorizontal: 20 }}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-            >
-                {
-                    // Check if scrolldata is an array and not empty
-
-                    scrolldata.map((data, index) => (
-                        <View style={{ marginLeft: 5 }} key={index}>
-                            <ImageBlurShadow
-                                style={styles.ImageStyles}
-                                source={{ uri: data.imageSet.verticalPoster.w240 }}
-                                imageWidth={200}
-                                imageBorderRadius={5}
-                                imageHeight={300}
-                                shadowOffset={30}
-                                shadowBlurRadius={12}
-                            />
-                            <Text style={styles.filmtitle}>{data.originalTitle}</Text>
-                            <View style={{ flexDirection: "row", columnGap: 10, alignItems: "center" }}>
-                                <Icon name='star' color="#FFC319" size={15} type='antdesign' />
-                                <Text style={{ color: Colors.Light.FontSubHeading }}>  {data.rating.toString().split('').join('.')}/10 IMDb</Text>
-                            </View>
-                        </View>
-                    ))
-
+                refreshControl={
+                    <RefreshControl
+                        refreshing={loading}
+                        onRefresh={FetchData}
+                    />
                 }
-            </ScrollView>
 
-            {/* Latest 2024 Section */}
-            <View style={styles.HomeHead}>
-                <Text h4 h4Style={{ fontSize: 16 }}>Latest 2024</Text>
-                <Button
-                    title="See more"
-                    buttonStyle={styles.buttonStyle}
-                    titleStyle={styles.titleStyle}
-                    type="outline"
-                />
-            </View>
+                style={styles.HomeContainer}>
+                {/* Now Showing Section */}
+                <View style={styles.HomeHead}>
+                    <Text h4 h4Style={{ fontSize: 16 }}>Now Showing</Text>
+                    <Button
+                        title="See more"
+                        buttonStyle={styles.buttonStyle}
+                        titleStyle={styles.titleStyle}
+                        type="outline"
+                    />
+                </View>
+                <ScrollView
+                    style={{ height: 380 }}
+                    contentContainerStyle={{ paddingHorizontal: 20 }}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                >
+                    {
+                        // Check if scrolldata is an array and not empty
 
-            {/* Check if filmData is an array and not empty */}
-            <View style={styles.detailContainer}>
-
-                {
-                    filmData.map((data, index) => (
-                        <View key={index} style={styles.DetailCard}>
-                            <Avatar
-                                avatarStyle={{ borderRadius: 5 }}
-                                containerStyle={{ height: 120, width: 80 }}
-                                source={{ uri: data.imageSet.verticalPoster.w240 }}
-                            />
-                            <View style={{ flexDirection: "column", justifyContent: "space-between", paddingVertical: 2, rowGap: 5 }}>
-                                <Text style={{ fontSize: 16, fontWeight: "bold" }}>{data.originalTitle}</Text>
-                                <View style={{ flexDirection: "row", columnGap: 2, alignItems: "center" }}>
-                                    <Icon name='star' color="#FFC319" size={15} type='antdesign' />
-                                    <Text> {data.rating.toString().split('').join('.')}/10 IMDb</Text>
-                                </View>
-                                <View style={{ flexDirection: "row", columnGap: 10 }}>
-                                    {data.genres && data.genres.map((genre, idx) => (
-                                        <Button
-                                            key={idx}
-                                            title={genre.name}
-                                            buttonStyle={styles.PillStyle}
-                                            titleStyle={styles.pillText}
-                                            type="outline"
-                                        />
-                                    ))}
-                                </View>
+                        scrolldata.map((data, index) => (
+                            <TouchableOpacity onPress={() => navigation.navigate("FilmDetails", { data: data })} style={{ marginLeft: 5 }} key={index}>
+                                <ImageBlurShadow
+                                    style={styles.ImageStyles}
+                                    source={{ uri: data.imageSet.verticalPoster.w240 }}
+                                    imageWidth={200}
+                                    imageBorderRadius={5}
+                                    imageHeight={300}
+                                    shadowOffset={30}
+                                    shadowBlurRadius={12}
+                                />
+                                <Text style={styles.filmtitle}>{data.originalTitle}</Text>
                                 <View style={{ flexDirection: "row", columnGap: 10, alignItems: "center" }}>
-                                    <Text>{data.showType}</Text>
+                                    <Icon name='star' color="#FFC319" size={15} type='antdesign' />
+                                    <Text style={{ color: Colors.Light.FontSubHeading }}>  {data.rating.toString().split('').join('.')}/10 IMDb</Text>
                                 </View>
-                            </View>
-                        </View>
-                    ))
-                }
+                            </TouchableOpacity>
+                        ))
 
-            </View>
-        </ScrollView>
+                    }
+                </ScrollView>
+
+                {/* Latest 2024 Section */}
+                <View style={styles.HomeHead}>
+                    <Text h4 h4Style={{ fontSize: 16 }}>Latest 2024</Text>
+                    <Button
+                        title="See more"
+                        buttonStyle={styles.buttonStyle}
+                        titleStyle={styles.titleStyle}
+                        type="outline"
+                    />
+                </View>
+
+                {/* Check if filmData is an array and not empty */}
+                <View style={styles.detailContainer}>
+
+                    {
+                        filmData.map((data, index) => (
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate("FilmDetails", { data: data })}
+                                key={index} style={styles.DetailCard}>
+                                <Avatar
+                                    avatarStyle={{ borderRadius: 5 }}
+                                    containerStyle={{ height: 120, width: 80 }}
+                                    source={{ uri: data.imageSet.verticalPoster.w240 }}
+                                />
+                                <View style={{ flexDirection: "column", justifyContent: "space-between", paddingVertical: 2, rowGap: 5 }}>
+                                    <Text style={{ fontSize: 16, fontWeight: "bold" }}>{data.originalTitle}</Text>
+                                    <View style={{ flexDirection: "row", columnGap: 2, alignItems: "center" }}>
+                                        <Icon name='star' color="#FFC319" size={15} type='antdesign' />
+                                        <Text> {data.rating.toString().split('').join('.')}/10 IMDb</Text>
+                                    </View>
+                                    <View style={{ flexDirection: "row", columnGap: 10 }}>
+                                        {data.genres && data.genres.map((genre, idx) => (
+                                            <Button
+                                                key={idx}
+                                                title={genre.name}
+                                                buttonStyle={styles.PillStyle}
+                                                titleStyle={styles.pillText}
+                                                type="outline"
+                                            />
+                                        ))}
+                                    </View>
+                                    <View style={{ flexDirection: "row", columnGap: 10, alignItems: "center" }}>
+                                        <Text>{data.showType}</Text>
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
+                        ))
+                    }
+
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     );
 };
 
@@ -199,20 +205,20 @@ const styles = StyleSheet.create({
     titleStyle: {
         fontSize: 10,
         color: '#AAA9B1',
-        fontFamily: "Outfit",
+
     },
     pillText: {
         fontWeight: "600",
         fontSize: 12,
         color: '#88A4E8',
-        fontFamily: "Outfit",
+
     },
     ImageStyles: {
         marginBottom: -20,
     },
     filmtitle: {
         fontSize: 14,
-        fontFamily: "Outfit",
+
         color: "#110E47",
         fontWeight: "bold",
     },
