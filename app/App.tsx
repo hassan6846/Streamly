@@ -1,20 +1,42 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View, ActivityIndicator } from 'react-native';
+//screens
+import HomePage from './screens/HomePage';
+import OfflinePage from './screens/OfflinePage';
+import WatchVideo from './screens/FilmStack/WatchVideo';
+import FilmDetails from './screens/FilmStack/FilmDetails';
+
+//font
+import * as Font from 'expo-font';
+
+import { useState, useEffect } from 'react';
 
 export default function App() {
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  useEffect(() => {
+
+    const loadFont = async () => {
+      await Font.loadAsync({
+        Outfit: require('./assets/font/outfit.ttf'),
+      });
+      setFontLoaded(true);
+    };
+
+    loadFont();
+  }, []);
+  if (!fontLoaded) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator
+          size="large"
+        />
+      </View>
+    );
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <FilmDetails />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+

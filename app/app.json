@@ -27,5 +27,20 @@
     "web": {
       "favicon": "./assets/favicon.png"
     }
-  }
+  },
+  "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/font/outfit.ttf"]
+        }
+      ],
+
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "DEFAULT"
+        }
+      ]
+    ]
 }
