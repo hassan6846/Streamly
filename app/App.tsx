@@ -14,6 +14,8 @@ import Profile from "./screens/Profile";
 
 // Tab Configurations
 import TabsConfigs from "./util/TabsConfig";
+import { Icon } from "@rneui/themed";
+import SearchPage from "./screens/SearchPage";
 
 
 // Tab Navigator
@@ -32,16 +34,25 @@ const App = () => {
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center",backgroundColor:"#fff" }}>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff" }}>
         <ActivityIndicator size="large" />
       </View>
     );
   }
 
   // Tab Navigator for Bottom Tabs
-  const BottomTabs = () => (
+  const BottomTabs = ({navigation}:{navigation:any}) => (
     <Tab.Navigator screenOptions={{ headerShown: false, tabBarShowLabel: false, tabBarStyle: { height: 80 } }}>
-      <Tab.Screen name="Home" component={HomePage} options={{ tabBarIcon: TabsConfigs.Home.Svg ,headerShown:true,headerTitleAlign:"center",headerTitle:"FilmKu",headerShadowVisible:false}} />
+      <Tab.Screen name="Home" component={HomePage} options={{
+        tabBarIcon: TabsConfigs.Home.Svg, headerShown: true, headerTitleAlign: "center", headerTitle: "FilmKu", headerShadowVisible: false,
+        headerRight: (() => (
+          <Icon onPress={()=>navigation.navigate("Search")} iconStyle={{padding:10,borderRadius:60}}  containerStyle={{marginRight:30}} name="search" type="material" />
+        )),
+        headerLeft: (() => (
+          <Icon  iconStyle={{padding:10,borderRadius:60}}  containerStyle={{marginLeft:30}}  name="menuunfold" type="antdesign" />
+        ))
+
+      }} />
       <Tab.Screen name="Saved" component={Saved} options={{ tabBarIcon: TabsConfigs.Me.Svg }} />
       <Tab.Screen name="Profile" component={Profile} options={{ tabBarIcon: TabsConfigs.Profile.Svg }} />
     </Tab.Navigator>
@@ -52,11 +63,13 @@ const App = () => {
       {/* Root Stack Navigator */}
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {/* Tab Navigator */}
-        <Stack.Screen options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}} name="MainTabs" component={BottomTabs} />
+        <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }} name="MainTabs" component={BottomTabs} />
 
         {/* Screens outside of Tabs */}
-        <Stack.Screen options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}} name="FilmDetails" component={FilmDetails} />
-        <Stack.Screen  options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}name="WatchVideo" component={WatchVideo} />
+        <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }} name="FilmDetails" component={FilmDetails} />
+        <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }} name="WatchVideo" component={WatchVideo} />
+        <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid }} name="Search" component={SearchPage} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
