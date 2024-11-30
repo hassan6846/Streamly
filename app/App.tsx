@@ -1,34 +1,32 @@
+import "react-native-gesture-handler"
 import React, { useState, useEffect } from "react";
-import { View, ActivityIndicator } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { CardStyleInterpolators, createStackNavigator } from "@react-navigation/stack";
-
+import { View, ActivityIndicator} from "react-native";
+import {StatusBar} from "expo-status-bar"
 // Screens
 import HomePage from "./screens/HomePage";
-import OfflinePage from "./screens/OfflinePage";
+
 import FilmDetails from "./screens/FilmStack/FilmDetails";
 import WatchVideo from "./screens/FilmStack/WatchVideo";
 import Saved from "./screens/Saved";
 import Profile from "./screens/Profile";
-
+import SearchPage from "./screens/SearchPage";
+import OfflinePage from "./screens/OfflinePage";
 // Tab Configurations
 import TabsConfigs from "./util/TabsConfig";
+//ui
 import { Icon } from "@rneui/themed";
-import SearchPage from "./screens/SearchPage";
-
-
-// Tab Navigator
+//  Navigation
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { CardStyleInterpolators, createStackNavigator } from "@react-navigation/stack";
 const Tab = createBottomTabNavigator();
-
-// Stack Navigator
 const Stack = createStackNavigator();
 
 const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading process (e.g., fonts, data fetching)
+ 
     setTimeout(() => setLoading(false), 2000);
   }, []);
 
@@ -60,17 +58,15 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      {/* Root Stack Navigator */}
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* Tab Navigator */}
-        <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }} name="MainTabs" component={BottomTabs} />
 
-        {/* Screens outside of Tabs */}
+        <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }} name="MainTabs" component={BottomTabs} />
         <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }} name="FilmDetails" component={FilmDetails} />
         <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }} name="WatchVideo" component={WatchVideo} />
         <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid }} name="Search" component={SearchPage} />
 
       </Stack.Navigator>
+      <StatusBar style="auto"/>
     </NavigationContainer>
   );
 };
