@@ -1,10 +1,9 @@
 import "react-native-gesture-handler"
 import React, { useState, useEffect } from "react";
-import { View, ActivityIndicator} from "react-native";
-import {StatusBar} from "expo-status-bar"
+import { View, ActivityIndicator } from "react-native";
+import { StatusBar } from "expo-status-bar"
 // Screens
 import HomePage from "./screens/HomePage";
-
 import FilmDetails from "./screens/FilmStack/FilmDetails";
 import WatchVideo from "./screens/FilmStack/WatchVideo";
 import Saved from "./screens/Saved";
@@ -26,7 +25,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
- 
+
     setTimeout(() => setLoading(false), 2000);
   }, []);
 
@@ -39,15 +38,15 @@ const App = () => {
   }
 
   // Tab Navigator for Bottom Tabs
-  const BottomTabs = ({navigation}:{navigation:any}) => (
+  const BottomTabs = ({ navigation }: { navigation: any }) => (
     <Tab.Navigator screenOptions={{ headerShown: false, tabBarShowLabel: false, tabBarStyle: { height: 80 } }}>
       <Tab.Screen name="Home" component={HomePage} options={{
         tabBarIcon: TabsConfigs.Home.Svg, headerShown: true, headerTitleAlign: "center", headerTitle: "FilmKu", headerShadowVisible: false,
         headerRight: (() => (
-          <Icon onPress={()=>navigation.navigate("Search")} iconStyle={{padding:10,borderRadius:60}}  containerStyle={{marginRight:30}} name="search" type="material" />
+          <Icon onPress={() => navigation.navigate("Search")} iconStyle={{ padding: 10, borderRadius: 60 }} containerStyle={{ marginRight: 30 }} name="search" type="material" />
         )),
         headerLeft: (() => (
-          <Icon  iconStyle={{padding:10,borderRadius:60}}  containerStyle={{marginLeft:30}}  name="menuunfold" type="antdesign" />
+          <Icon iconStyle={{ padding: 10, borderRadius: 60 }} containerStyle={{ marginLeft: 30 }} name="menuunfold" type="antdesign" />
         ))
 
       }} />
@@ -66,7 +65,7 @@ const App = () => {
         <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid }} name="Search" component={SearchPage} />
 
       </Stack.Navigator>
-      <StatusBar style="auto"/>
+      <StatusBar style="auto" />
     </NavigationContainer>
   );
 };
