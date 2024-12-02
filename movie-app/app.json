@@ -26,14 +26,15 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
-  },
-  "plugins": [
-    [
-      "expo-screen-orientation",
-      {
-        "initialOrientation": "DEFAULT"
-      }
+    },
+    "plugins": [
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "DEFAULT"
+        }
+      ]
     ]
-  ]
+  }
+
 }
