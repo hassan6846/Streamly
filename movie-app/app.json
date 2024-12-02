@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "showbox",
-    "slug": "showbox",
+    "name": "app",
+    "slug": "app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,15 +21,14 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.mrhassan.showbox"
+      }
+
     },
     "web": {
       "favicon": "./assets/favicon.png"
     }
   },
   "plugins": [
-
     [
       "expo-screen-orientation",
       {
