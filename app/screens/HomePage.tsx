@@ -54,7 +54,7 @@ const HomePage = ({ navigation }: { navigation }) => {
                 console.log('Film Data:', data1.shows);
                 console.log('Top Rated Data:', data2.shows);
             } else {
-             
+
                 console.error('Error fetching data:', response1.statusText, response2.statusText);
             }
         } catch (error) {
