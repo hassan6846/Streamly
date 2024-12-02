@@ -37,5 +37,9 @@
     "@babel/core": "^7.20.0",
     "sharp-cli": "^5.1.0"
   },
-  "private": true
+  "private": true,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
