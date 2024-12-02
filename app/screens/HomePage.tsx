@@ -13,6 +13,8 @@ const HomePage = ({ navigation }: { navigation }) => {
     const [filmData, setFilmData] = useState<any>([]);
     const [scrolldata, setscrolldata] = useState<any>([]);
     const FetchData = async () => {
+        const xKey = process.env.API_KEY
+        const xPath = process.env.HOST_PATH
         // First request URL (for regular films)
         const url1 = 'https://streaming-availability.p.rapidapi.com/shows/search/filters?country=us&series_granularity=show&order_direction=asc&order_by=original_title&genres_relation=and&output_language=en&show_type=movie';
 
@@ -25,15 +27,15 @@ const HomePage = ({ navigation }: { navigation }) => {
                 fetch(url1, {
                     method: "GET",
                     headers: {
-                        'x-rapidapi-key': '5f16ed5ffemshe4550dacca20074p1a0450jsnfe1557d7577b',
-                        'x-rapidapi-host': 'streaming-availability.p.rapidapi.com',
+                        'x-rapidapi-key': xKey,
+                        'x-rapidapi-host': xPath,
                     },
                 }),
                 fetch(url2, {
                     method: "GET",
                     headers: {
-                        'x-rapidapi-key': '5f16ed5ffemshe4550dacca20074p1a0450jsnfe1557d7577b',
-                        'x-rapidapi-host': 'streaming-availability.p.rapidapi.com',
+                        'x-rapidapi-key': xKey,
+                        'x-rapidapi-host': xPath,
                     },
                 }),
             ]);
@@ -53,7 +55,8 @@ const HomePage = ({ navigation }: { navigation }) => {
             }
         } catch (error) {
             console.error('Error fetching data:', error);
-            Alert.alert("Error while connecting to the server");
+            Alert.alert("Network Error", "Please Check your internet connection and try again later.");
+            navigation.navigate("Offline")
         } finally {
             setLoading(false);
         }
@@ -66,7 +69,7 @@ const HomePage = ({ navigation }: { navigation }) => {
 
     if (loading) {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: "center" ,backgroundColor:"#fff"}}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: "center", backgroundColor: "#fff" }}>
                 <ActivityIndicator size="large" />
             </View>
         );

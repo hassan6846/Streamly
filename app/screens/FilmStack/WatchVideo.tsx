@@ -30,23 +30,23 @@ const WatchVideo = () => {
     }, []);
 
     return (
-        <SafeAreaView style={{flex:1}}>
-        <View style={styles.container}>
-            <WebView
-                source={{ uri: videoUrl }}
-                style={styles.webView}
-                javaScriptEnabled={true}
-                domStorageEnabled={true}
-                onNavigationStateChange={handleNavigationChange}
-                startInLoadingState={true}
-                mixedContentMode="compatibility"
-                allowsInlineMediaPlayback={true}
-                mediaPlaybackRequiresUserAction={false}
-                useWebKit={true}
-                originWhitelist={['*']}
-                onError={(syntheticEvent) => console.warn(syntheticEvent.nativeEvent)}
-            />
-        </View>
+        <SafeAreaView style={{ flex: 1 }}>
+            <View style={styles.container}>
+                <WebView
+                    source={{ uri: videoUrl }}
+                    style={styles.webView}
+                    javaScriptEnabled={true}
+                    domStorageEnabled={true}
+                    onNavigationStateChange={handleNavigationChange}
+                    startInLoadingState={true}
+                    mixedContentMode="compatibility"
+                    allowsInlineMediaPlayback={true}
+                    mediaPlaybackRequiresUserAction={false}
+                    useWebKit={true}
+                    originWhitelist={['*']}
+                    onError={(syntheticEvent) => console.warn(syntheticEvent.nativeEvent)}
+                />
+            </View>
         </SafeAreaView>
     );
 };

@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 //state
 import { useRoute } from "@react-navigation/native";
-import { Icon, Text } from "@rneui/themed";
+import { Text, Icon } from "@rneui/themed";
 
 const FilmDetails = ({ navigation }: { navigation: any }) => {
     const route = useRoute<any>();
@@ -20,19 +20,24 @@ const FilmDetails = ({ navigation }: { navigation: any }) => {
         <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
             <ScrollView style={{ flex: 1, backgroundColor: "#fff", padding: 20 }}>
                 {/* Poster */}
-                <Avatar
-                    onPress={() =>
-                        navigation.navigate("WatchVideo", {
-                            id: data.imdbId,
-                        })
-                    }
-                    containerStyle={{ width: "100%", height: 250 }}
-                    avatarStyle={{ borderRadius: 10 }}
-                    source={{ uri: data.imageSet.horizontalPoster.w1080 }}
-                />
+                <View style={{ position: "relative" }}>
 
+
+                    <Avatar
+                        onPress={() =>
+                            navigation.navigate("WatchVideo", {
+                                id: data.imdbId,
+                            })
+                        }
+                        containerStyle={{ width: "100%", height: 250 }}
+                        avatarStyle={{ borderRadius: 10 }}
+                        source={{ uri: data.imageSet.horizontalPoster.w1080 }}
+                    />
+                </View>
                 {/* Title */}
                 <View>
+                    <Icon size={50} name="play" style={{ position: "absolute" }} type="antdesign" />
+
                     <Text style={{ marginTop: 10, marginBottom: 10 }} h3>
                         {data.title}
                     </Text>
@@ -74,7 +79,7 @@ const FilmDetails = ({ navigation }: { navigation: any }) => {
                         <Text style={styles.detailLabel}>Rating</Text>
                         <Text style={styles.detailValue}>{data.rating.toString().split('').join('.')}</Text>
                     </View>
-                    
+
                 </View>
 
 

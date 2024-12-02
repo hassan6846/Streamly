@@ -22,7 +22,7 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
 
@@ -58,12 +58,11 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-
         <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }} name="MainTabs" component={BottomTabs} />
         <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }} name="FilmDetails" component={FilmDetails} />
         <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }} name="WatchVideo" component={WatchVideo} />
-        <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid }} name="Search" component={SearchPage} />
-
+        <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid,presentation:"transparentModal",detachPreviousScreen:true }} name="Search" component={SearchPage} />
+        <Stack.Screen component={OfflinePage} name="Offline"/>
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

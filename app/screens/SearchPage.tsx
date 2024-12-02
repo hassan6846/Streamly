@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Avatar, Icon, Button } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -10,21 +10,24 @@ const SearchMovies = ({ navigation }) => {
 
     // Fetch movies from API
     const fetchMovies = async (query) => {
+        const xKey=process.env.API_KEY
+        const xPath=process.env.HOST_PATH
         const url = `https://streaming-availability.p.rapidapi.com/shows/search/title?country=us&title=${encodeURIComponent(query)}&series_granularity=show&show_type=movie&output_language=en`;
         const options = {
             method: 'GET',
             headers: {
-                'x-rapidapi-key': '5f16ed5ffemshe4550dacca20074p1a0450jsnfe1557d7577b',
-                'x-rapidapi-host': 'streaming-availability.p.rapidapi.com',
+                'x-rapidapi-key':xKey ,
+                'x-rapidapi-host':xPath
             },
         };
 
         try {
             setLoading(true);
             const response = await fetch(url, options);
-            const result = await response.json(); // Parse the response
-            console.log(response)
-            setSearchResults(result.results || []); // Save results
+            const result = await response.json();
+
+            setSearchResults(result || []);
+            console.log(result)
         } catch (error) {
             console.error('Error fetching movies:', error);
         } finally {
@@ -44,15 +47,14 @@ const SearchMovies = ({ navigation }) => {
             {/* Search Bar */}
             <View style={styles.searchBarContainer}>
                 <TextInput
+                    returnKeyType="search" // This sets the keyboard's return key to "Search"
+                    onSubmitEditing={handleSearch} // Trigger search when return key is pressed
                     style={styles.searchInput}
                     placeholder="Search for movies..."
                     value={searchQuery}
                     onChangeText={(text) => setSearchQuery(text)}
-                    onSubmitEditing={handleSearch} // Search on 'Enter'
                 />
-                <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
-                    <Icon name="search" type="feather" size={20} color="#fff" />
-                </TouchableOpacity>
+
             </View>
 
             {/* Loading Indicator */}
@@ -101,9 +103,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        padding: 10,
     },
     searchBarContainer: {
         flexDirection: 'row',
+        paddingHorizontal: 10,
         margin: 10,
         alignItems: 'center',
     },
@@ -128,8 +132,8 @@ const styles = StyleSheet.create({
     },
     detailCard: {
         flexDirection: 'row',
-        marginBottom: 20,
-        backgroundColor: '#f9f9f9',
+
+        backgroundColor: '#fff',
         borderRadius: 10,
         padding: 10,
         alignItems: 'center',
