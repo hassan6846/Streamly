@@ -1,0 +1,50 @@
+{
+  "expo": {
+    "name": "showbox",
+    "slug": "showbox",
+    "version": "1.0.0",
+    "extra": {
+      "API_KEY": "5f16ed5ffemshe4550dacca20074p1a0450jsnfe1557d7577b",
+      "HOST_PATH": "streaming-availability.p.rapidapi.com"
+    },
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.stearmly.anonymous"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  },
+  "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/font/outfit.ttf"]
+        }
+      ],
+
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "DEFAULT"
+        }
+      ]
+    ]
+}
