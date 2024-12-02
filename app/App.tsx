@@ -26,7 +26,7 @@ const App = () => {
 
   useEffect(() => {
 
-    setTimeout(() => setLoading(false), 2000);
+    setTimeout(() => setLoading(false), 1000);
   }, []);
 
   if (loading) {
@@ -61,8 +61,8 @@ const App = () => {
         <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }} name="MainTabs" component={BottomTabs} />
         <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }} name="FilmDetails" component={FilmDetails} />
         <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }} name="WatchVideo" component={WatchVideo} />
-        <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid,presentation:"transparentModal",detachPreviousScreen:true }} name="Search" component={SearchPage} />
-        <Stack.Screen component={OfflinePage} name="Offline"/>
+        <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS, presentation: "modal", detachPreviousScreen: true }} name="Search" component={SearchPage} />
+        <Stack.Screen  options={{ cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,}} component={OfflinePage} name="Offline" />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
