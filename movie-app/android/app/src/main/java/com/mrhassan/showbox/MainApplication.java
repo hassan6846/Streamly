@@ -1,4 +1,4 @@
-package com.stearmly.anonymous;
+package com.mrhassan.showbox;
 
 import android.app.Application;
 import android.content.res.Configuration;

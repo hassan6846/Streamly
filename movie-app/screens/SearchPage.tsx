@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, Activi
 import { Avatar, Icon, Button } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 //constants
-import Constants from 'expo-constants';
+
 const SearchMovies = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -11,14 +11,13 @@ const SearchMovies = ({ navigation }) => {
 
     // Fetch movies from API
     const fetchMovies = async (query) => {
-        const xKey = Constants.expoConfig.extra.API_KEY;
-        const xPath = Constants.expoConfig.extra.HOST_PATH;
+
         const url = `https://streaming-availability.p.rapidapi.com/shows/search/title?country=us&title=${encodeURIComponent(query)}&series_granularity=show&show_type=movie&output_language=en`;
         const options = {
             method: 'GET',
             headers: {
-                'x-rapidapi-key': xKey,
-                'x-rapidapi-host': xPath
+                'x-rapidapi-key': '5f16ed5ffemshe4550dacca20074p1a0450jsnfe1557d7577b',
+                        'x-rapidapi-host': 'streaming-availability.p.rapidapi.com',
             },
         };
 

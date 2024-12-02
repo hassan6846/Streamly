@@ -7,10 +7,9 @@ import ImageBlurShadow from 'react-native-image-blur-shadow';
 import Colors from '../util/Color';
 import { SafeAreaView } from 'react-native-safe-area-context';
 //constants
-import Constants from 'expo-constants';
 
-const xKey = Constants.expoConfig.extra.API_KEY;
-const xPath = Constants.expoConfig.extra.HOST_PATH;
+
+
 const HomePage = ({ navigation }: { navigation }) => {
     const [loading, setLoading] = useState(true);
     const [filmData, setFilmData] = useState<any>([]);
@@ -30,15 +29,15 @@ const HomePage = ({ navigation }: { navigation }) => {
                 fetch(url1, {
                     method: "GET",
                     headers: {
-                        'x-rapidapi-key': xKey,
-                        'x-rapidapi-host': xPath,
+                        'x-rapidapi-key': '5f16ed5ffemshe4550dacca20074p1a0450jsnfe1557d7577b',
+                        'x-rapidapi-host': 'streaming-availability.p.rapidapi.com',
                     },
                 }),
                 fetch(url2, {
                     method: "GET",
                     headers: {
-                        'x-rapidapi-key': xKey,
-                        'x-rapidapi-host': xPath,
+                        'x-rapidapi-key': '5f16ed5ffemshe4550dacca20074p1a0450jsnfe1557d7577b',
+                        'x-rapidapi-host': 'streaming-availability.p.rapidapi.com',
                     },
                 }),
             ]);
@@ -68,7 +67,7 @@ const HomePage = ({ navigation }: { navigation }) => {
     };
 
     useEffect(() => {
-        console.log(xKey)
+
         FetchData();
     }, []);
 
