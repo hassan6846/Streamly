@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Avatar, Icon, Button } from '@rneui/themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+//constants
+import Constants from 'expo-constants';
 const SearchMovies = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -10,14 +11,14 @@ const SearchMovies = ({ navigation }) => {
 
     // Fetch movies from API
     const fetchMovies = async (query) => {
-        const xKey=process.env.API_KEY
-        const xPath=process.env.HOST_PATH
+        const xKey = Constants.expoConfig.extra.API_KEY;
+        const xPath = Constants.expoConfig.extra.HOST_PATH;
         const url = `https://streaming-availability.p.rapidapi.com/shows/search/title?country=us&title=${encodeURIComponent(query)}&series_granularity=show&show_type=movie&output_language=en`;
         const options = {
             method: 'GET',
             headers: {
-                'x-rapidapi-key':xKey ,
-                'x-rapidapi-host':xPath
+                'x-rapidapi-key': xKey,
+                'x-rapidapi-host': xPath
             },
         };
 

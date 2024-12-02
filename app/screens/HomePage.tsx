@@ -6,15 +6,18 @@ import ImageBlurShadow from 'react-native-image-blur-shadow';
 //utils
 import Colors from '../util/Color';
 import { SafeAreaView } from 'react-native-safe-area-context';
+//constants
+import Constants from 'expo-constants';
 
-
+const xKey = Constants.expoConfig.extra.API_KEY;
+const xPath = Constants.expoConfig.extra.HOST_PATH;
 const HomePage = ({ navigation }: { navigation }) => {
     const [loading, setLoading] = useState(true);
     const [filmData, setFilmData] = useState<any>([]);
+
     const [scrolldata, setscrolldata] = useState<any>([]);
     const FetchData = async () => {
-        const xKey = process.env.API_KEY
-        const xPath = process.env.HOST_PATH
+
         // First request URL (for regular films)
         const url1 = 'https://streaming-availability.p.rapidapi.com/shows/search/filters?country=us&series_granularity=show&order_direction=asc&order_by=original_title&genres_relation=and&output_language=en&show_type=movie';
 
@@ -51,10 +54,12 @@ const HomePage = ({ navigation }: { navigation }) => {
                 console.log('Film Data:', data1.shows);
                 console.log('Top Rated Data:', data2.shows);
             } else {
+             
                 console.error('Error fetching data:', response1.statusText, response2.statusText);
             }
         } catch (error) {
             console.error('Error fetching data:', error);
+
             Alert.alert("Network Error", "Please Check your internet connection and try again later.");
             navigation.navigate("Offline")
         } finally {
@@ -63,7 +68,7 @@ const HomePage = ({ navigation }: { navigation }) => {
     };
 
     useEffect(() => {
-
+        console.log(xKey)
         FetchData();
     }, []);
 

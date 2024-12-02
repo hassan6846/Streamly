@@ -43,10 +43,10 @@ const App = () => {
       <Tab.Screen name="Home" component={HomePage} options={{
         tabBarIcon: TabsConfigs.Home.Svg, headerShown: true, headerTitleAlign: "center", headerTitle: "FilmKu", headerShadowVisible: false,
         headerRight: (() => (
-          <Icon onPress={() => navigation.navigate("Search")} iconStyle={{ padding: 10, borderRadius: 60 }} containerStyle={{ marginRight: 30 }} name="search" type="material" />
+          <Icon onPress={() => navigation.navigate("Search")} size={20} iconStyle={{ padding: 10, borderRadius: 60 }} containerStyle={{ marginRight: 30 }} name="search" type="material" />
         )),
         headerLeft: (() => (
-          <Icon iconStyle={{ padding: 10, borderRadius: 60 }} containerStyle={{ marginLeft: 30 }} name="menuunfold" type="antdesign" />
+          <Icon iconStyle={{ padding: 10, borderRadius: 60 }} size={20} containerStyle={{ marginLeft: 30 }} name="menuunfold" type="antdesign" />
         ))
 
       }} />
@@ -62,7 +62,7 @@ const App = () => {
         <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }} name="FilmDetails" component={FilmDetails} />
         <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }} name="WatchVideo" component={WatchVideo} />
         <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS, presentation: "modal", detachPreviousScreen: true }} name="Search" component={SearchPage} />
-        <Stack.Screen  options={{ cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,}} component={OfflinePage} name="Offline" />
+        <Stack.Screen options={{ cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS, }} component={OfflinePage} name="Offline" />
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
