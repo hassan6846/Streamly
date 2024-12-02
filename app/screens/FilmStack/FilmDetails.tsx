@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 //state
 import { useRoute } from "@react-navigation/native";
 import { Text, Icon } from "@rneui/themed";
-
+import IconPlay from "react-native-vector-icons/AntDesign"
 const FilmDetails = ({ navigation }: { navigation: any }) => {
     const route = useRoute<any>();
     const { data } = route.params;
@@ -24,15 +24,26 @@ const FilmDetails = ({ navigation }: { navigation: any }) => {
 
 
                     <Avatar
+
+                        containerStyle={{ width: "100%", height: 250 }}
+                        avatarStyle={{ borderRadius: 10 }}
+                        source={{ uri: data.imageSet.horizontalPoster.w1080 }}
+                    />
+                    <IconPlay
+
                         onPress={() =>
                             navigation.navigate("WatchVideo", {
                                 id: data.imdbId,
                             })
                         }
-                        containerStyle={{ width: "100%", height: 250 }}
-                        avatarStyle={{ borderRadius: 10 }}
-                        source={{ uri: data.imageSet.horizontalPoster.w1080 }}
-                    />
+                        style={{
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: [{ translateX: -25 }, { translateY: -25 }]
+                        }}
+
+                        color="#fff" size={50} name="playcircleo" />
                 </View>
                 {/* Title */}
                 <View>
