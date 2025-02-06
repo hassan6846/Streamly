@@ -1,0 +1,12 @@
+.AlertBar{
+    width: 100%;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    background-color: #fc2a2a;
+}
+.Alert_text{
+    color:#fff;
+    font-weight: 300;
+}
